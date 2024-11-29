@@ -1,5 +1,8 @@
-#### Imports et définition des variables globales
 
+#### Imports et définition des variables globales
+import sys
+
+sys.setrecursionlimit(2000)
 
 #### Fonctions secondaires
 
@@ -13,10 +16,19 @@ def artcode_i(s):
     Returns:
         list: la liste des tuples (caractère, nombre d'occurences)
     """
-    
-    # votre code ici
+    resultat = []
+    Cx = s[0]
+    Ox = 1
+    for k in range(1, len(s)) : 
+        if s[k] == s[k-1] :
+            Ox += 1
+        else :
+            resultat.append((Cx, Ox))
+            Cx = s[k]
+            Ox = 1
 
-    return [ ]
+    resultat.append((Cx, Ox))
+    return resultat
 
 
 def artcode_r(s):
@@ -29,13 +41,17 @@ def artcode_r(s):
         list: la liste des tuples (caractère, nombre d'occurences)
     """
     
-    # votre code ici
+    if(len(s) == 0) :
+        return []
+    Ox = 1
+    while Ox < len(s) and s[Ox] == s[0] :
+        Ox += 1
+    return [(s[0], Ox)]+artcode_r(s[Ox:]) 
+    
 
     # cas de base
     # recherche nombre de caractères identiques au premier
     # appel récursif
-
-    return []
     
 
 #### Fonction principale
